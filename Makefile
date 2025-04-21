@@ -1,8 +1,14 @@
 COMPOSE_FILE_PATH = ./docker-compose.yml
 PROJECT_NAME = transcendence
 
-# Default target
 all: up
+
+build:
+	@if [ ! -f package.json ]; then npm init -y; fi
+	npm install
+	npx tsc
+# Default target
+
 
 # Build the docker images and the containers and start them
 up:
