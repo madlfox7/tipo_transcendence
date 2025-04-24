@@ -26,7 +26,7 @@ import { applySettings } from "./utils/applySettings.js";
 import { attachEventListenersToLinks } from "./utils/utils.js";
 
 // ------------------------------- CONFIGURE GLOBAL VARIABLES -------------------------------
-export const BASE_URL = "https://localhost";
+export const BASE_URL = "https://shiny-broccoli-4pv9pw9x9w9fjw.github.dev:443";
 export const BIG_TEXT = '20px';
 export const DEFAULT_TEXT = '16px';
 
