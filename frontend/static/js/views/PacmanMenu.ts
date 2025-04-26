@@ -33,19 +33,14 @@ import AbstractView from "./AbstractView.js";
 // @ts-ignore: JavaScript file with no types
 import { PacmanMenu, eventListeners } from "../scripts/pacmanMenu.js";
 
-// Minimal safe type for AbstractView (optional)
-type AbstractViewType = {
-	setTitle(title: string): void;
-	getHtml(): Promise<string>;
-	loadJS?(): void;
-	stopJS?(): void;
-	cleanUpEventListeners?(): void;
-};
 
 // Minimal safe type for eventListeners (optional)
 type EventListenersMap = Record<string, EventListener>;
+//??????????????????
 
-export default class PacmanMenuView extends (AbstractView as { new (): AbstractViewType }) {
+
+
+export default class PacmanMenuView extends (AbstractView as { new (): AbstractView }) {
 	constructor() {
 		super();
 		this.setTitle("pacman menu");
@@ -66,7 +61,7 @@ export default class PacmanMenuView extends (AbstractView as { new (): AbstractV
 	}
 
 	cleanUpEventListeners(): void {
-		// @ts-ignore: eventListeners is a JS object
+
 		for (const [event, listener] of Object.entries(eventListeners as EventListenersMap)) {
 			document.removeEventListener(event, listener);
 		}

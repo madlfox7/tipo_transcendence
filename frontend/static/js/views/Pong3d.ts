@@ -35,21 +35,21 @@ import AbstractView from "./AbstractView.js";
 // @ts-ignore: pongThree class and eventListeners are from a JS module
 import { pongThree, eventListeners } from "../scripts/pong/pong3d/main.js";
 
-// Optional: minimal typing for AbstractView
-type AbstractViewType = {
-	setTitle(title: string): void;
-	getHtml(): Promise<string>;
-	loadJS?(): void;
-	stopJS?(): void;
-	cleanUpEventListeners?(): void;
-};
+// // Optional: minimal typing for AbstractView
+// type AbstractViewType = {
+// 	setTitle(title: string): void;
+// 	getHtml(): Promise<string>;
+// 	loadJS?(): void;
+// 	stopJS?(): void;
+// 	cleanUpEventListeners?(): void;
+// };
 
 // Optional: structure for the pongThree instance
 type PongThreeInstance = {
 	stopGameLoop(): void;
 };
 
-export default class Pong3DView extends (AbstractView as { new (): AbstractViewType }) {
+export default class Pong3DView extends AbstractView{
 	private pongThree!: PongThreeInstance;
 
 	constructor() {
@@ -62,7 +62,6 @@ export default class Pong3DView extends (AbstractView as { new (): AbstractViewT
 	}
 
 	loadJS(): void {
-		// @ts-ignore: pongThree comes from JS
 		this.pongThree = new pongThree();
 	}
 
@@ -71,7 +70,6 @@ export default class Pong3DView extends (AbstractView as { new (): AbstractViewT
 	}
 
 	cleanUpEventListeners(): void {
-		// @ts-ignore: JS event map
 		for (const [event, listener] of Object.entries(eventListeners as Record<string, EventListener>)) {
 			document.removeEventListener(event, listener);
 		}

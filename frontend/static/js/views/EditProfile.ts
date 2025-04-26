@@ -26,36 +26,75 @@
 //     //      document.removeEventListener(event, listener);
 //     //  }
 //     // }
+// // }
+// // @ts-ignore
+// import AbstractView from "./AbstractView.js";
+// // @ts-ignore
+// import { editProfile } from "../scripts/editProfile.js";
+// // import { eventListeners } from "../scripts/editProfile.js";
+
+// export default class EditProfileView extends AbstractView {
+// 	constructor() {
+// 		super();
+// 		this.setTitle("satori - edit profile");
+// 	}
+
+// 	async getHtml(): Promise<string> {
+// 		return (await fetch("static/html/editProfile.html")).text();
+// 	}
+
+// 	loadJS(): void {
+// 		editProfile();
+// 	}
+
+// 	stopJS(): void {
+// 		// No loop in this view
+// 	}
+
+// 	// cleanUpEventListeners(): void {
+// 	// 	for (const [event, listener] of Object.entries(eventListeners)) {
+// 	// 		document.removeEventListener(event, listener as EventListener);
+// 	// 	}
+// 	// }
 // }
-// @ts-ignore
+
+// ///???????????????????????
+
+
+/* Edit-profile view (TypeScript)
+ * Mirrors the original JS logic exactly – only type annotations added.
+ */
+
+// Runtime imports still use the compiled .js extension so the router keeps working.
 import AbstractView from "./AbstractView.js";
-// @ts-ignore
-import { editProfile } from "../scripts/editProfile.js";
-// import { eventListeners } from "../scripts/editProfile.js";
+import { editProfile /*, eventListeners*/ } from "../scripts/editProfile.js";
 
 export default class EditProfileView extends AbstractView {
-	constructor() {
-		super();
-		this.setTitle("satori - edit profile");
-	}
+  constructor() {
+    super();
+    this.setTitle("satori - edit profile");
+  }
 
-	async getHtml(): Promise<string> {
-		return (await fetch("static/html/editProfile.html")).text();
-	}
+  /** Fetches the static HTML fragment and returns its text. */
+  async getHtml(): Promise<string> {
+    const res = await fetch("static/html/editProfile.html");
+    return res.text();
+  }
 
-	loadJS(): void {
-		editProfile();
-	}
+  /** Kick-off the page-specific JS (form bindings, avatar preview, etc.). */
+  loadJS(): void {
+    editProfile();
+  }
 
-	stopJS(): void {
-		// No loop in this view
-	}
+  /** No animation loop here, so nothing to stop. */
+  stopJS(): void {}
 
-	// cleanUpEventListeners(): void {
-	// 	for (const [event, listener] of Object.entries(eventListeners)) {
-	// 		document.removeEventListener(event, listener as EventListener);
-	// 	}
-	// }
+  // Uncomment if you later expose an `eventListeners` map from editProfile.ts
+  /*
+  cleanUpEventListeners(): void {
+    for (const [event, listener] of Object.entries(eventListeners)) {
+      document.removeEventListener(event, listener as EventListener);
+    }
+  }
+  */
 }
-
-///???????????????????????

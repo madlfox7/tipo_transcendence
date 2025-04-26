@@ -21,16 +21,9 @@ import AbstractView from "./AbstractView.js";
 // @ts-ignore: JS module
 import { pongStatistics } from "../scripts/pongStatistics.js";
 
-// Optional AbstractView type structure
-type AbstractViewType = {
-	setTitle(title: string): void;
-	getHtml(): Promise<string>;
-	loadJS?(): void;
-	stopJS?(): void;
-	cleanUpEventListeners?(): void;
-};
 
-export default class PongStatisticsView extends (AbstractView as { new (): AbstractViewType }) {
+
+export default class PongStatisticsView extends AbstractView  {
 	constructor() {
 		super();
 		this.setTitle("satori - pong statistics");
@@ -41,7 +34,6 @@ export default class PongStatisticsView extends (AbstractView as { new (): Abstr
 	}
 
 	loadJS(): void {
-		// @ts-ignore: JS function
 		pongStatistics();
 	}
 }

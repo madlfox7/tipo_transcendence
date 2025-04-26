@@ -28,15 +28,15 @@ import AbstractView from "./AbstractView.js";
 import { settings } from "../scripts/settings.js";
 
 // Minimal structure for base class (optional)
-type AbstractViewType = {
-	setTitle(title: string): void;
-	getHtml(): Promise<string>;
-	loadJS?(): void;
-	stopJS?(): void;
-	cleanUpEventListeners?(): void;
-};
+// type AbstractViewType = {
+// 	setTitle(title: string): void;
+// 	getHtml(): Promise<string>;
+// 	loadJS?(): void;
+// 	stopJS?(): void;
+// 	cleanUpEventListeners?(): void;
+// };
 
-export default class SettingsView extends (AbstractView as { new (): AbstractViewType }) {
+export default class SettingsView extends AbstractView {
 	constructor() {
 		super();
 		this.setTitle("satori - settings");
@@ -45,9 +45,8 @@ export default class SettingsView extends (AbstractView as { new (): AbstractVie
 	getHtml(): Promise<string> {
 		return fetch("static/html/settings.html").then((res) => res.text());
 	}
-
+////????
 	loadJS(): void {
-		// @ts-ignore: settings is from a JS module
 		settings();
 	}
 

@@ -33,19 +33,19 @@ import AbstractView from "./AbstractView.js";
 // @ts-ignore: PongMenu and eventListeners come from a JS module
 import { PongMenu, eventListeners } from "../scripts/pongMenu.js";
 
-// Minimal AbstractView structure (optional)
-type AbstractViewType = {
-	setTitle(title: string): void;
-	getHtml(): Promise<string>;
-	loadJS?(): void;
-	stopJS?(): void;
-	cleanUpEventListeners?(): void;
-};
+// // Minimal AbstractView structure (optional)
+// type AbstractViewType = {
+// 	setTitle(title: string): void;
+// 	getHtml(): Promise<string>;
+// 	loadJS?(): void;
+// 	stopJS?(): void;
+// 	cleanUpEventListeners?(): void;
+// };
 
 // Optional type for JS event map
 type EventMap = Record<string, EventListener>;
 
-export default class PongMenuView extends (AbstractView as { new (): AbstractViewType }) {
+export default class PongMenuView extends AbstractView  {
 	constructor() {
 		super();
 		this.setTitle("pong menu");
@@ -56,7 +56,6 @@ export default class PongMenuView extends (AbstractView as { new (): AbstractVie
 	}
 
 	loadJS(): void {
-		// @ts-ignore: JS constructor
 		var pongMenu = new PongMenu();
 	}
 
@@ -65,7 +64,6 @@ export default class PongMenuView extends (AbstractView as { new (): AbstractVie
 	}
 
 	cleanUpEventListeners(): void {
-		// @ts-ignore: JS object map
 		for (const [event, listener] of Object.entries(eventListeners as EventMap)) {
 			document.removeEventListener(event, listener);
 		}

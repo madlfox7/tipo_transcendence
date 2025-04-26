@@ -27,16 +27,9 @@ import AbstractView from "./AbstractView.js";
 // @ts-ignore: signIn is a JS function
 import { signIn } from "../scripts/signIn.js";
 
-// Optional abstract base type
-type AbstractViewType = {
-	setTitle(title: string): void;
-	getHtml(): Promise<string>;
-	loadJS?(): void;
-	stopJS?(): void;
-	cleanUpEventListeners?(): void;
-};
 
-export default class SignInView extends (AbstractView as { new (): AbstractViewType }) {
+
+export default class SignInView extends AbstractView  {
 	constructor() {
 		super();
 		this.setTitle("satori - sign in");
@@ -47,7 +40,6 @@ export default class SignInView extends (AbstractView as { new (): AbstractViewT
 	}
 
 	loadJS(): void {
-		// @ts-ignore: JS function
 		signIn();
 	}
 

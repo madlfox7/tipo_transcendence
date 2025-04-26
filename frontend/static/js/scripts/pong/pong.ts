@@ -213,9 +213,9 @@
 		this.rightScore.textContent = "0";
 		this.gameStarted = false;
 		this.startButton.style.display = "block";
-	//	this.startButton.disabled = false;
+		//this.startButton.disabled = false;
 	//this.startButton = document.getElementById('btnStart') as HTMLButtonElement;
-	(this.startButton as HTMLButtonElement).disabled = true;
+	(this.startButton as HTMLButtonElement).disabled = false;
 		this.timer.reset();
 	}
 
@@ -231,7 +231,7 @@
 			this.gameStarted = false;
 			this.startButton.style.display = "block";
 			//this.startButton.disabled = false;
-			(this.startButton as HTMLButtonElement).disabled = true;
+			(this.startButton as HTMLButtonElement).disabled = false;
 
 			this.timer.reset();
 		}
@@ -388,17 +388,20 @@
 		this.ball.resetPosition();
 	};
 
-	drawObjects(): void {
-		this.ctx.clearRect(0, 0, this.cvs.width, this.cvs.height);
-		this.ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
-		this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
-		this.drawNet();
-		this.drawRect(this.leftPad.x, this.leftPad.y, this.leftPad.width, this.leftPad.height, this.leftPad.color);
-		this.drawRect(this.rightPad.x, this.rightPad.y, this.rightPad.width, this.rightPad.height, this.rightPad.color);
-		this.drawSquare(this.ball.x, this.ball.y, this.ball.size, this.ball.color);
-		if (!this.gameOver)
-			requestAnimationFrame(this.drawObjects);
-	}
+	private drawObjects = (): void => {
+        this.ctx.clearRect(0, 0, this.cvs.width, this.cvs.height);
+        this.ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+        this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
+
+        this.drawNet();
+        this.drawRect(this.leftPad.x, this.leftPad.y,
+                      this.leftPad.width, this.leftPad.height, this.leftPad.color);
+        this.drawRect(this.rightPad.x, this.rightPad.y,
+                      this.rightPad.width, this.rightPad.height, this.rightPad.color);
+        this.drawSquare(this.ball.x, this.ball.y, this.ball.size, this.ball.color);
+
+        if (!this.gameOver) requestAnimationFrame(this.drawObjects);
+    };
 
 	update(): void {
 		this.leftPad.move();

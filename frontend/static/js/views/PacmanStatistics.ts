@@ -22,15 +22,17 @@ import AbstractView from "./AbstractView.js";
 import { pacmanStatistics } from "../scripts/pacmanStatistics.js";
 
 // Minimal safe type for AbstractView (optional)
-type AbstractViewType = {
-	setTitle(title: string): void;
-	getHtml(): Promise<string>;
-	loadJS?(): void;
-	stopJS?(): void;
-	cleanUpEventListeners?(): void;
-};
+// type AbstractViewType = {
+// 	setTitle(title: string): void;
+// 	getHtml(): Promise<string>;
+// 	loadJS?(): void;
+// 	stopJS?(): void;
+// 	cleanUpEventListeners?(): void;
+// };
 
-export default class PacmanStatisticsView extends (AbstractView as { new (): AbstractViewType }) {
+
+export default class PacmanStatisticsView extends AbstractView {
+//export default class PacmanStatisticsView extends (AbstractView as { new (): AbstractView }) {
 	constructor() {
 		super();
 		this.setTitle("satori - pacman statistics");

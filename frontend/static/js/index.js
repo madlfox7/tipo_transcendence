@@ -26,7 +26,7 @@ import { applySettings } from "./utils/applySettings.js";
 import { attachEventListenersToLinks } from "./utils/utils.js";
 
 // ------------------------------- CONFIGURE GLOBAL VARIABLES -------------------------------
-export const BASE_URL = "https://legendary-adventure-wq5jqgjwjw4254j9-443.app.github.dev:443";
+export const BASE_URL = "https://refactored-space-spork-7j54jp4g4wq3rg4x-443.app.github.dev:443";
 export const BIG_TEXT = '20px';
 export const DEFAULT_TEXT = '16px';
 
