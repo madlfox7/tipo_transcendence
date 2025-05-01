@@ -7,7 +7,7 @@ build:
 	@if [ ! -f package.json ]; then npm init -y; fi
 	npm install
 	npm install bootstrap
-	npx sass frontend/static/css/main.scss frontend/static/css/main.css
+	npx sass --load-path=frontend/node_modules frontend/static/css/main.scss frontend/static/css/main.css
 	npx tsc
 
 # Default target
