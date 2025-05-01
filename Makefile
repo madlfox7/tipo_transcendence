@@ -2,20 +2,41 @@ COMPOSE_FILE_PATH = ./docker-compose.yml
 PROJECT_NAME = transcendence
 
 all: up
-
-tailwind-install:
-	curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64
-	chmod +x tailwindcss-linux-x64
-	mv tailwindcss-linux-x64 tailwindcss
-
 tailwind-build:
+	@echo "📦 Checking Tailwind CLI..."
+	@if [ ! -f tailwindcss ]; then \
+		echo "Downloading Tailwind CSS CLI..."; \
+		curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64 && \
+		chmod +x tailwindcss-linux-x64 && \
+		mv tailwindcss-linux-x64 tailwindcss; \
+	fi
+
+	@echo "⚙️  Checking tailwind.config.js..."
+	@if [ ! -f tailwind.config.js ]; then \
+		echo "Creating tailwind.config.js..."; \
+		echo 'module.exports = {' > tailwind.config.js; \
+		echo '  content: ["./**/*.html", "./**/*.js"],' >> tailwind.config.js; \
+		echo '  theme: {' >> tailwind.config.js; \
+		echo '    extend: {' >> tailwind.config.js; \
+		echo '      spacing: {' >> tailwind.config.js; \
+		echo '        glass: "32px",' >> tailwind.config.js; \
+		echo '      },' >> tailwind.config.js; \
+		echo '    },' >> tailwind.config.js; \
+		echo '  },' >> tailwind.config.js; \
+		echo '  plugins: [],' >> tailwind.config.js; \
+		echo '};' >> tailwind.config.js; \
+	fi
+
+	@echo "📄 Checking tailwind.css input..."
 	@mkdir -p frontend/static/css
 	@if [ ! -f frontend/static/css/tailwind.css ]; then \
-		echo "Creating default tailwind.css"; \
+		echo "Creating default frontend/static/css/tailwind.css"; \
 		echo '@tailwind base;' > frontend/static/css/tailwind.css; \
 		echo '@tailwind components;' >> frontend/static/css/tailwind.css; \
 		echo '@tailwind utilities;' >> frontend/static/css/tailwind.css; \
 	fi
+
+	@echo "🚀 Building Tailwind CSS..."
 	./tailwindcss -i frontend/static/css/tailwind.css -o frontend/static/css/main-tailwind.css
 
 build:
