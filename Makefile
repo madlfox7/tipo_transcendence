@@ -7,8 +7,17 @@ tailwind-install:
 	curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64
 	chmod +x tailwindcss-linux-x64
 	mv tailwindcss-linux-x64 tailwindcss
+
 tailwind-build:
+	@mkdir -p frontend/static/css
+	@if [ ! -f frontend/static/css/tailwind.css ]; then \
+		echo "Creating default tailwind.css"; \
+		echo '@tailwind base;' > frontend/static/css/tailwind.css; \
+		echo '@tailwind components;' >> frontend/static/css/tailwind.css; \
+		echo '@tailwind utilities;' >> frontend/static/css/tailwind.css; \
+	fi
 	./tailwindcss -i frontend/static/css/tailwind.css -o frontend/static/css/main-tailwind.css
+
 build:
 	@if [ ! -f package.json ]; then npm init -y; fi
 	npm install
