@@ -3,6 +3,11 @@ PROJECT_NAME = transcendence
 
 all: up
 
+install:
+	curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64
+	chmod +x tailwindcss-linux-x64
+	mv tailwindcss-linux-x64 tailwindcss
+
 build:
 	@if [ ! -f package.json ]; then npm init -y; fi
 	npm install
